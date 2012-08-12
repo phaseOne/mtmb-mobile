@@ -1,0 +1,15 @@
+{
+  "name": "MTMB-mobile",
+  "description": "A mobile version of the mtmb.mtwp.net website, built with node.js, express, and mongodb",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "express": "3.0.0rc2",
+    "jade": "*",
+    "stylus": "*",
+    "mongoose": "3.x"
+  }
+}
