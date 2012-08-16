@@ -9,7 +9,7 @@
   "dependencies": {
     "express": "3.0.0rc2",
     "jade": "*",
-    "stylus": "*",
+    "less-middleware": "*",
     "mongoose": "3.x"
   }
 }
