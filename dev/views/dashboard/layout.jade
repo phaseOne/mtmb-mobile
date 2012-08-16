@@ -1,0 +1,91 @@
+unless reqXHR
+  doctype 5
+  html(lang='en')
+    head
+      meta(charset='utf-8')
+      title= title
+      meta(name='viewport', content='width=device-width, initial-scale=1.0')
+      link(rel='stylesheet', href='/assets/css/bootstrap.css')
+    body
+      block nav
+        .navbar.navbar-fixed-top
+          .navbar-inner
+            .container-fluid
+              a.btn.btn-navbar(data-toggle='collapse', data-target='.nav-collapse')
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
+              
+              a.brand(href='/dashboard/home') MTMB Mobile Dashboard
+              
+              .btn-group.pull-right
+                a.btn.dropdown-toggle(data-toggle='dropdown', href='#')
+                  i.icon-user
+                  | 
+                  = activeuser.fullname
+                  | 
+                  span.caret
+                ul.dropdown-menu
+                  li
+                    a(href='/dashboard/users/' + activeuser.username) Your profile
+                  li.divider
+                  li
+                    a(href='/', target='_blank') View main page
+                  li
+                    a(href='/dashboard/logout') Sign out
+      block body
+        .container-fluid
+          .row-fluid
+            .span2
+              .well#sidebar-nav
+                ul.nav.nav-list
+                  != link('Home', '/dashboard/home', 'icon-home')
+                  li.nav-header Frontpage
+                  != link('Announcements', '/dashboard/announcements', 'icon-bullhorn')
+                  != link('Links', '/dashboard/links', 'icon-globe')
+                  li.nav-header Timetable
+                  != link('Display Options', '/dashboard/display_options', 'icon-eye-open')
+                  != link('Football Games', '/dashboard/football', 'icon-time')
+                  != link('Competitions', '/dashboard/competitions', 'icon-time')
+                  li.nav-header Access Control
+                  != link('Users', '/dashboard/users', 'icon-user')
+                  != link('Your Profile', '/dashboard/users/' + activeuser.username, 'icon-wrench')
+            .span10#content
+              block content
+      script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
+      script(src='/assets/js/bootstrap.min.js')
+      script
+        function loadPartial(url) {
+          $('#content').load(url, function(response, status, xhr) {
+            document.title = xhr.getResponseHeader('Title');                // Set new page title
+            if (status == "error") {
+              var msg = "Sorry but there was an error: ";
+              $("#content").html(msg + xhr.status + " " + xhr.statusText);
+            };
+          }).data('popstate', 'loadPartial');                               // Add test for .bind('popstate')
+          
+          $('#sidebar-nav li a').each(function() {                          // Set le active navbar items
+            if ($(this).attr('href') == url) {
+              $(this).parent().addClass('active');
+              $(this).children('i').addClass('icon-white');
+            } else {
+              $(this).parent().removeClass('active icon-white');
+              $(this).children('i').removeClass('icon-white');
+            }
+          });
+        };
+        
+        $('#sidebar-nav li a').click(function(e) {
+          e.preventDefault();                         // Halt page load
+          
+          var url = $(this).attr('href');             // Get link url
+          
+          loadPartial(url);                           // Load le partial
+          window.history.pushState(null, null, url);  // Add le previous partial to le browser's history
+        });
+        
+        $(window).bind('popstate', function(e) {                                              // When le back button is pressed or when le main page initally loads
+          if ($('#content').data('popstate') === 'loadPartial') loadPartial(location.pathname);   // Load le partial only if the popstate is real
+        });
+else
+  block content

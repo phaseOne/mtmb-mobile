@@ -1,0 +1,85 @@
+extends layout
+
+append styles
+  :stylus
+    .sticky
+      padding 0
+      margin 0 auto
+      max-width 340px
+      text-align center
+    .content
+      padding 15px
+    .seg1
+      margin 20px 0 20px
+    ul
+      padding 0 0 15px
+    .nomargin
+      margin 0
+    @media (min-width: 768px)
+      .seg1
+        width 40%
+        float left
+      .seg2
+        width 58%
+        margin 204px 0 0 2%
+        float left
+    @media (max-width: 768px)
+      .ui-header .ui-title
+        font-size 12px
+        margin 1em 90px 1em
+      .ui-header .ui-btn-left
+        top .3em
+        left 5px
+
+block meta
+  meta(name='viewport', content='width=device-width, minimum-scale=1, maximum-scale=1, user-scalable=no')
+  meta(name='apple-mobile-web-app-capable', content='yes')
+  meta(name='apple-mobile-web-app-status-bar-style', content='black')
+
+block content
+  div#home(data-role='page')
+    div.content
+      div.seg1
+        div.sticky
+          img(src='images/logo.png')
+          p
+            strong Manheim Township Marching Band
+          p The 12th
+        ul(data-role='listview', data-inset='true', data-theme='c', data-dividertheme='e')
+          li(data-role='list-divider', role='heading') This Week: somedate - another
+          li
+            a(href='#fbg') Football game details
+              span.ui-li-count 4:00 PM
+          li
+            a(href='#comp') Competition details
+              span.ui-li-count 11:00 AM
+      div.seg2
+        ul(data-role='listview', data-inset='true', data-theme='c', data-dividertheme='b')
+          li(data-role='list-divider', role='heading') General Information
+          li
+            a(href='https://sites.google.com/site/mthsmarchingband/') Full MTMB website
+          li
+            a(href='http://www.cavalcadeofbands.com/') Cavalcade of Bands website
+          li(data-role='list-divider', role='heading') Contact
+          li
+            a(href='mailto:siegelsc@mtwp.net') Email Director Mr. Scott Siegel
+          li
+            a(href='http://maps.google.com/maps?q=5134+School+Rd,+Lancaster,+PA+17606') Map of MT High School
+  div#fbg(data-role='page', data-title='Football game details', data-add-back-btn='true')
+    div(data-role='header')
+      h1 Football game details
+    div.content
+      div.seg1.nomargin
+        div.sticky
+          p uhhhhhhhh
+        ul(data-role='listview', data-inset='true', data-theme='c')
+          li(data-role='list-divider', role='heading') Friday, 3iou
+  div#comp(data-role='page', data-title='Competition details', data-add-back-btn='true')
+    div(data-role='header')
+      h1 Competition details
+    div.content
+      div.seg1.nomargin
+        div.sticky
+          p waaaaaaaahhhhh
+        ul(data-role='listview', data-inset='true', data-theme='c')
+          li(data-role='list-divider', role='heading') Sat, 0384ur
